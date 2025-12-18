@@ -104,11 +104,12 @@ void derive_graphics_metrics()
 void draw_menu()
 {
     ClearBackground(BLACK);
+    draw_image(background8_texture, 0, 0, 1920, 1080);
 
     const Text game_title = {
-        "Breakout",
-        { 0.50f, 0.50f },
-        200.0f,
+        "Minecraft",
+        { 0.70f, 0.50f },
+        150.0f,
         RED,
         4.0f,
         &menu_font
@@ -117,9 +118,9 @@ void draw_menu()
 
     const Text game_subtitle = {
         "Press Enter to Start",
-        { 0.50f, 0.65f },
-        32.0f,
-        WHITE,
+        { 0.70f, 0.65f },
+        25.0f,
+        BLACK,
         4.0f,
         &menu_font
     };
@@ -152,7 +153,26 @@ void draw_ui()
 void draw_level()
 {
     ClearBackground(BLACK);
+    switch (current_level_index) {
+    case 0:
+        draw_image(background_texture, 0, 0, 1920, 1080);
+        break;
+    case 1:
+        draw_image(background3_texture, 0, 0, 1920, 1080);
+        break;
+    case 2:
+        draw_image(background2_texture, 0, 0, 1920, 1080);
+        break;
+    case 3:
+        draw_image(background4_texture, 0, 0, 1920, 1080);
+        break;
+    case 4:
+        draw_image(background5_texture, 0, 0, 1920, 1080);
+        break;
+    }
+    switch (game_state) {}
 
+    DrawRectangle(0, 0, 1920, 1080, {0,0,0, 100});
     for (size_t row = 0; row < current_level.rows; ++row) {
         for (size_t column = 0; column < current_level.columns; ++column) {
             const char data = current_level.data[row * current_level.columns + column];
@@ -163,8 +183,26 @@ void draw_level()
             case WALL:
                 draw_image(wall_texture, texture_x_pos, texture_y_pos, cell_size);
                 break;
+            case WALL1:
+                draw_image(wall1_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
             case BLOCKS:
                 draw_image(block_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BLOCKS1:
+                draw_image(block1_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BLOCKS2:
+                draw_image(block2_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BLOCKS3:
+                draw_image(block3_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BLOCKS4:
+                draw_image(block4_texture, texture_x_pos, texture_y_pos, cell_size);
+                break;
+            case BLOCKS5:
+                draw_image(block5_texture, texture_x_pos, texture_y_pos, cell_size * 3);
                 break;
             default:;
             }
@@ -189,9 +227,10 @@ void draw_ball()
 void draw_pause_menu()
 {
     ClearBackground(BLACK);
+    draw_image(background7_texture, 0, 0, 1920, 1080);
 
     const Text paused_title = {
-        "Press Escape to Resume",
+        "Press Space to Resume",
         { 0.50f, 0.50f },
         32.0f,
         WHITE,
@@ -232,6 +271,7 @@ void draw_victory_menu()
 {
     animate_victory_menu();
 
+    draw_image(background6_texture, 0, 0, 1920, 1080);
     DrawRectangleV({ 0.0f, 0.0f }, { screen_size.x, screen_size.y }, { 0, 0, 0, 50 });
 
     for (const auto& [x, y] : victory_balls_pos) {

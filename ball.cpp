@@ -41,6 +41,15 @@ void move_ball()
             ball_vel.y = -ball_vel.y;
             next_ball_pos.y = std::round(next_ball_pos.y);
         }
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, WALL1)) {
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, WALL1)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, WALL1)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS);
 
@@ -49,6 +58,76 @@ void move_ball()
             next_ball_pos.x = std::round(next_ball_pos.x);
         }
         if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+
+        temp = VOID;
+        --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS4)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS4);
+
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS4)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS4)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+
+        temp = VOID;
+        --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS5)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS5);
+
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS5)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS5)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+
+        temp = VOID;
+        --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS3)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS3);
+
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS3)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS3)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+
+        temp = VOID;
+        --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS2)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS2);
+
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS2)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS2)) {
+            ball_vel.y = -ball_vel.y;
+            next_ball_pos.y = std::round(next_ball_pos.y);
+        }
+
+        temp = VOID;
+        --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS1)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS1);
+
+        if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS1)) {
+            ball_vel.x = -ball_vel.x;
+            next_ball_pos.x = std::round(next_ball_pos.x);
+        }
+        if (is_colliding_with_level_cell({ ball_pos.x, next_ball_pos.y }, ball_size, BLOCKS1)) {
             ball_vel.y = -ball_vel.y;
             next_ball_pos.y = std::round(next_ball_pos.y);
         }
