@@ -7,7 +7,7 @@
 
 #include <cmath>
 #include <numbers>
-
+int apples = minapples;
 void spawn_ball()
 {
     for (int column = 0; column < current_level.columns; column++) {
@@ -24,6 +24,7 @@ void spawn_ball()
     }
 outer_loop_end:;
 }
+
 
 void move_ball()
 {
@@ -52,6 +53,7 @@ void move_ball()
         }
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS)) {
             ball_vel.x = -ball_vel.x;
@@ -66,6 +68,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS4)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS4);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS4)) {
             ball_vel.x = -ball_vel.x;
@@ -80,6 +83,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS5)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS5);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS5)) {
             ball_vel.x = -ball_vel.x;
@@ -94,6 +98,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS3)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS3);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS3)) {
             ball_vel.x = -ball_vel.x;
@@ -108,6 +113,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS2)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS2);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS2)) {
             ball_vel.x = -ball_vel.x;
@@ -120,8 +126,17 @@ void move_ball()
 
         temp = VOID;
         --current_level_blocks;
+    } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS6)) {
+        char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS6);
+        PlaySound(food_sound);
+
+        apples = apples + 1;
+        temp = VOID;
+
+        --current_level_blocks;
     } else if (is_colliding_with_level_cell(next_ball_pos, ball_size, BLOCKS1)) {
         char& temp = get_colliding_level_cell(next_ball_pos, ball_size, BLOCKS1);
+        PlaySound(hit_sound);
 
         if (is_colliding_with_level_cell({ next_ball_pos.x, ball_pos.y }, ball_size, BLOCKS1)) {
             ball_vel.x = -ball_vel.x;
@@ -136,6 +151,7 @@ void move_ball()
         --current_level_blocks;
     } else if (is_colliding_with_paddle(next_ball_pos, ball_size)) {
         ball_vel.y = -std::abs(ball_vel.y);
+        PlaySound(stone_sound);
     }
 
     ball_pos = next_ball_pos;

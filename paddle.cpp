@@ -19,7 +19,7 @@ void spawn_paddle()
 outer_loop_end:;
 }
 
-void move_paddle(const float x_offset)
+void move_paddle(const float x_offset, const float y_offset)
 {
     float next_paddle_pos_x = paddle_pos.x + x_offset;
     if (is_colliding_with_level_cell({ next_paddle_pos_x, paddle_pos.y }, paddle_size, WALL)) {
@@ -29,6 +29,15 @@ void move_paddle(const float x_offset)
         next_paddle_pos_x = std::round(next_paddle_pos_x);
     }
     paddle_pos.x = next_paddle_pos_x;
+
+    float next_paddle_pos_y = paddle_pos.y + y_offset;
+    if (is_colliding_with_level_cell({ next_paddle_pos_x, paddle_pos.y }, paddle_size, WALL)) {
+        next_paddle_pos_y = std::round(next_paddle_pos_x);
+    }
+    if (is_colliding_with_level_cell({ next_paddle_pos_x, paddle_pos.y }, paddle_size, WALL1)) {
+        next_paddle_pos_y= std::round(next_paddle_pos_y);
+    }
+    paddle_pos.y = next_paddle_pos_y;
 }
 
 bool is_colliding_with_paddle(const Vector2 pos, const Vector2 size)

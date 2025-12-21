@@ -33,6 +33,10 @@ void load_textures()
     block3_texture = LoadTexture("data/images/block3.png");
     block4_texture = LoadTexture("data/images/block4.png");
     block5_texture = LoadTexture("data/images/block5.png");
+    block6_texture = LoadTexture("data/images/block6.png");
+
+    life_texture = LoadTexture("data/images/life.png");
+
     paddle_texture = LoadTexture("data/images/paddle.png");
     ball_sprite = load_sprite("data/images/ball/ball", ".png", 8, true, 10);
 }
@@ -57,6 +61,10 @@ void unload_textures()
     UnloadTexture(block3_texture);
     UnloadTexture(block4_texture);
     UnloadTexture(block5_texture);
+    UnloadTexture(block6_texture);
+    UnloadTexture(life_texture);
+
+
     UnloadTexture(paddle_texture);
     unload_sprite(ball_sprite);
 }
@@ -66,11 +74,32 @@ void load_sounds()
     InitAudioDevice();
     win_sound = LoadSound("data/sounds/win.wav");
     lose_sound = LoadSound("data/sounds/lose.wav");
+    food_sound = LoadSound("data/sounds/food.wav");
+    stone_sound = LoadSound("data/sounds/stone.wav");
+    stone_sound = LoadSound("data/sounds/hit.wav");
+
+    SetSoundVolume(stone_sound, 100);
+
+    SetSoundVolume(food_sound, 50);
+
+    SetSoundVolume(hit_sound, 50);
+
+
+    background_sound = LoadMusicStream("data/music/background.mp3");
+
+    background_sound.looping = true;
 }
 
 void unload_sounds()
 {
     UnloadSound(win_sound);
     UnloadSound(lose_sound);
+    UnloadSound(food_sound);
+    UnloadSound(stone_sound);
+    UnloadSound(hit_sound);
+
+
+
+    UnloadMusicStream(background_sound);
     CloseAudioDevice();
 }

@@ -9,7 +9,7 @@ inline constexpr float paddle_speed = 0.2f;
 inline Vector2 paddle_pos;
 
 void spawn_paddle();
-void move_paddle(float x_offset);
+void move_paddle(float x_offset, float y_offset);
 bool is_colliding_with_paddle(Vector2 pos, Vector2 size);
 
 #endif // PADDLE_H

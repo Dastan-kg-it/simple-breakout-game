@@ -27,11 +27,23 @@ inline Texture2D block2_texture;
 inline Texture2D block3_texture;
 inline Texture2D block4_texture;
 inline Texture2D block5_texture;
+inline Texture2D block6_texture;
+
+inline Texture2D life_texture;
+
+
 
 inline sprite ball_sprite;
 
 inline Sound win_sound;
 inline Sound lose_sound;
+inline Sound food_sound;
+inline Sound stone_sound;
+inline Sound hit_sound;
+
+
+
+inline Music background_sound;
 
 void load_fonts();
 void unload_fonts();

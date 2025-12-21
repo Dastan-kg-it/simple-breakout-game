@@ -4,8 +4,8 @@
 #include "graphics.h"
 #include "level.h"
 #include "paddle.h"
-
 #include "raylib.h"
+int lives = maxlives;
 
 void update()
 {
@@ -16,22 +16,38 @@ void update()
         }
         break;
     case in_game_state:
+        UpdateMusicStream(background_sound);
         if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
-            move_paddle(-paddle_speed);
+            move_paddle(-paddle_speed, 0);
         }
         if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
-            move_paddle(paddle_speed);
+            move_paddle(paddle_speed, 0);
+        }
+        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
+            move_paddle(0, -paddle_speed);
+        }
+        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
+            move_paddle(0, paddle_speed);
         }
         move_ball();
         if (!is_ball_inside_level()) {
-            load_level();
-            PlaySound(lose_sound);
+            --lives;
+            if (lives == 0) {
+                game_state = lose_state;
+                lives = maxlives;
+                current_level_index = 0;
+            } else {
+                load_level();
+            }
         } else if (current_level_blocks == 0) {
             load_level(1);
             PlaySound(win_sound);
         }
         if (IsKeyPressed(KEY_SPACE)) {
             game_state = paused_state;
+        }
+        if (IsKeyPressed(KEY_X)) {
+            game_state = victory_state;
         }
 
         break;
@@ -46,12 +62,17 @@ void update()
             current_level_index = -1;
         }
         break;
+    case lose_state:
+        if (IsKeyPressed(KEY_BACKSPACE)) {
+            game_state = menu_state;
+            current_level_index = 0;
+        }
+        break;
 }
 }
 
 void draw()
 {
-    // TODO
     switch (game_state) {
     case menu_state:
         draw_menu();
@@ -68,6 +89,9 @@ void draw()
     case victory_state:
         draw_victory_menu();
         break;
+    case lose_state:
+        draw_lose_menu();
+        break;
     }
 }
 
@@ -83,9 +107,9 @@ int main()
     load_level();
     load_sounds();
 
+    PlayMusicStream(background_sound);
     while (!WindowShouldClose()) {
         BeginDrawing();
-
         draw();
         update();
 

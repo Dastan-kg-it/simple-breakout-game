@@ -148,6 +148,12 @@ void draw_ui()
         &menu_font
     };
     draw_text(boxes_remaining);
+
+    for (int i = 0; i < lives; i++) {
+        float x = 100 + i * 60;
+        float y = 100;
+        draw_image(life_texture, x, y, 50, 50);
+    }
 }
 
 void draw_level()
@@ -203,6 +209,9 @@ void draw_level()
                 break;
             case BLOCKS5:
                 draw_image(block5_texture, texture_x_pos, texture_y_pos, cell_size * 3);
+                break;
+            case BLOCKS6:
+                draw_image(block6_texture, texture_x_pos, texture_y_pos, cell_size);
                 break;
             default:;
             }
@@ -289,7 +298,7 @@ void draw_victory_menu()
     draw_text(victory_title);
 
     const Text victory_subtitle = {
-        "Press Enter to Restart",
+        "Press Enter to Restart        You have collected " + std::to_string(apples) + " out of 20 apples.",
         { 0.50f, 0.65f },
         32.0f,
         WHITE,
@@ -297,4 +306,32 @@ void draw_victory_menu()
         &menu_font
     };
     draw_text(victory_subtitle);
+}
+
+void draw_lose_menu()
+{
+
+    ClearBackground(BLACK);
+
+    DrawRectangleV({ 0.0f, 0.0f }, { screen_size.x, screen_size.y }, { 0, 0, 0, 50 });
+
+    const Text lose_title = {
+        "You died!",
+        { 0.50f, 0.50f },
+        100.0f,
+        RED,
+        4.0f,
+        &menu_font
+    };
+    draw_text(lose_title);
+
+    const Text lose_subtitle = {
+        "Press BACKSPACE to Restart",
+        { 0.50f, 0.65f },
+        32.0f,
+        WHITE,
+        4.0f,
+        &menu_font
+    };
+    draw_text(lose_subtitle);
 }
